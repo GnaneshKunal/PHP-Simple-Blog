@@ -9,67 +9,184 @@ function do_header($title){
       <?php echo $title; ?>
     </title>
     <style type="text/css">
-      textarea {
-        resize: none;
-        font-size: 15px;
-        font-family: "Times New Roman";
-        font-weight: bolder;
+      body {
+         margin: 0px;
+         padding: 0px;
+         background-color: #131211;
+         font-family: Arial, Helvetica, sans-serif;
+         color: #7f7d78;
+         font-size: 13px;
+         line-height: 19px;
+         height: 1000px;
       }
       
-      #b-container {
-        margin: 0px;
-        padding: 10px;
-        padding: 0;
+      #main {
+         background: #c4c0be url(back.png) repeat-x;
       }
       
-      #b-text {
-        font-size: 20px;
-        font-weight: bold;
+      small {
+         color: #595856;
+         font-weight: bold;
+         font-size: 11px;
+         display: block;
+         margin-bottom: 15px;
       }
       
-      #cont-title {
-        padding-left: 15px;
+      #main.container {
+         background-color: #f5f7f8;
+         min-height: 400px;
       }
       
-      #cont-content {
-        padding-left: 15px;
+      #footer {
+         color: white;
+         background: url(back.png) repeat-x;
+         padding: 40px;
       }
       
-      #b-submit {
-        padding-left: 15px;
+      .container {
+         width: 950px;
+         margin-left: 200px;
+         margin-right: 200px;
+         position: relative;
       }
       
-      #b-sub-img {
-        height: 50px;
+      #header {
+         padding-top: 20px;
       }
       
-      #nav-menu-nav {}
-      
-      #nav-menu-ins {
-        float: left;
+      #logo h1,
+      #logo small {
+         margin: 0px;
+         display: block;
+         text-indent: -9999px;
       }
       
-      li {
-        list-style-type: none;
-        padding-left: 70px;
-        padding-right: 70px;
+      ul#menu {
+         margin: 0px;
+         padding: 0px;
+         position: absolute;
+         right: 0px;
       }
       
-      #nav-menu-logout {
-        float: left;
+      ul#menu li {
+         display: inline;
+         margin-left: 12px;
       }
       
-      .clear {
-        clear: both;
+      ul#menu li a {
+         text-decoration: none;
+         color: #716d6a;
+         font-family: Verdana, Arial, Helvetica, sans-serif;
+         font-size: 15px;
+         font-weight: bold;
+         text-transform: uppercase;
       }
       
-      .post-content {
-        padding-top: 25px;
+      ul#menu li a.active,
+      ul#menu li a:hover {
+         color: #211e1e;
+      }
+      
+      .block {
+         border: 1px solid #a3a09e;
+         background-color: #ffffff;
+         margin-bottom: 20px;
+      }
+      
+      .block_inside {
+         display: block;
+         border: 1px solid #fff;
+         background: #fff;
+         padding: 30px;
+         overflow: auto;
+      }
+      
+      .image_block {
+         border: 1px solid #b5b5b5;
+         background-color: #d2d2d2;
+         padding: 5px;
+         float: left;
+      }
+      
+      .image_block img {
+         border: 1px solid #b5b5b5;
+      }
+      
+      .text_block {
+         /* position: absolute;
+         right: 0;
+         height: 430px; */
+         float: left;
+         width: 430px;
+         margin-left: 30px;
+      }
+      
+      h2 {
+         margin: 0px 0px 10px 0px;
+         font-size: 20px;
+         font-family: Helvetica, Arial, sans-serif;
+         color: #000000;
+      }
+      
+      a {
+         color: #007de2;
+         text-decoration: none;
+      }
+      
+      a:hover {
+         text-decoration: none;
+      }
+      
+      a.button {
+         border: 1px solid #32312f;
+         border-radius: 9;
+         padding: 5px 10px 5px 10px;
+         color: #000;
+         text-decoration: none;
+         text-transform: uppercase;
+         font-size: 9px;
+         line-height: 25px;
+      }
+      
+      a.button:hover {
+         background: #007de2;
+         border-color: #007de2;
+      }
+      
+      #footer {
+         font-family: verdana, Arial, Helvetica, sans-serif;
+         font-size: 10px;
+      }
+      
+      .footer_column {
+         float: left;
+         width: 120px;
+         margin-right: 30px;
+      }
+      
+      #footer .long {
+         width: 610px;
+      }
+      
+      #footer h3 {
+         color: #e2dddc;
+         text-transform: uppercase;
+         font-size: 10px;
+      }
+      
+      .footer column ul li,
+      .footer_column ul {
+         list-style: none;
+         margin: 0px;
+         padding: 0px;
       }
     </style>
   </head>
 
   <body>
+   
+      <div class="container">
+         <div id="header">
     <?php
     if(valid_user()){
         do_menu();
@@ -78,16 +195,50 @@ function do_header($title){
     ?>
       <?php
     echo "<br/ >";
-    do_content($content);
-    echo "<br/ >";
+}
+class knownexception extends Exception{
+  
 }
 function do_content($content){
     ?>
-        <?php echo $content; ?>
+                           <div id="block_featured" class="block">
+            <span class="block_inside">
+               <div class="image_block">
+                  
+               </div>
+               <div class="text_block">
+                           <div style="border:2px solid red;text-align:center;font-size:20px;"><?php echo $content; ?></div>
+                           </div>
+            </span>
+         </div>
+        
         <?php
 }
 function do_footer(){
-    ?>
+    ?><div id="footer">
+      <div class="container">
+         <div class="footer_column long">
+            <h3>Website is currently in an Upgrade</h3>
+            <p>If you have any problems with the website then please <a href="">Mail me</a>.</p>
+         </div>
+         <div class="footer_column">
+            <h3>Catch me at</h3>
+            <ul>
+               <li><a href="">Google</a></li>
+               <li><a href="">Facebook</a></li>
+               <li><a href="">Twitter</a></li>
+               <li><a href="">Github</a></li>
+            </ul>
+         </div>
+         <div class="footer_column">
+            <h3>MVC</h3>
+            <ul>
+               <li><a href="">MVC Strategy</a></li>
+               <li><a href="">What is MVC?</a></li>
+            </ul>
+         </div>
+      </div>
+   </div>
   </body>
 
   </html>
@@ -272,30 +423,51 @@ function do_post(){
 function do_menu(){
     if(valid_user()){
 ?>
-              <div id="nav-menu">
-                <nav id="nav-menu-nav">
-                  <li id="nav-menu-ins">
-                    <a href="world.php">World</a>
-                  </li>
-                  <li id="nav-menu-logout">
-                    <a href="insert.php">Add post</a>
-                  </li>
-                  <li id="nav-menu-logout">
-                    <a href="main.php">My Posts</a>
-                  </li>
-                  <li id="nav-menu-logout">
-                    <a href="logout.php">Log out</a>
-                  </li>
-                </nav>
-              </div>
-              <div></div>
-              <div class="clear">
-              </div>
+              <ul id="menu">
+               <li><a href="world.php">World</a></li>
+               <li><a href="search.php">Search</a></li>
+               <li><a href="insert.php">Add Post</a></li>
+               <li><a href="main.php">My Posts</a></li>
+               <li><a href="logout.php">Log out</a></li>
+            </ul>
+            <div id="logo">
+               <img src="gun.png" height="75" widith="75" />
+               <h1>PHP-Blog</h1>
+               <small>Simple is always powerful</small>
+            </div>
               <?php
     }
 }?>
                 <?php
 echo date('Y-m-j');
+
+function do_search(){
+  if(valid_user()){
+    ?><fieldset>
+      <legend>Search</legend>
+      <form method="post" action="search_form_script.php">
+          <table>
+            <tr>
+              <td>
+                Enter Username:
+              </td>
+              <td>
+                <input type="text" name="search" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input type="submit" name="submit" value='Search' />
+              </td>
+            </tr>
+          </table>
+      </form>
+    </fieldset>
+    <?php
+  }else{
+    header("Location:index.php");
+  }
+}
 
 
 function show_posts_div($user){
@@ -305,37 +477,41 @@ function show_posts_div($user){
             header('Location:index.php');
         $sql="select title,content,bdate,author,blogid from blogs where author='$user' order by blogid desc";
             if($result=$db->query($sql)){
-                echo "<div style='border:2px solid black'>";
+               ?><div id="block_featured" class="block">
+            <span class="block_inside">
+               <div class="image_block">
+                  
+               </div>
+               <div class="text_block">
+               <?php
                 if($row=$result->num_rows >0){
                     while($row=$result->fetch_assoc()){
-                    ?>
-                  <div class="post-content">
-                    <div>
-                      <?php echo $row['title']; ?>
-                    </div>
-                    <div>
-                      <?php echo $row['content']; ?>
-                    </div>
-                    <div>
-                      <?php echo $row['bdate']; ?>
-                    </div>
-                    <div>
-                      <?php echo $row['author']; ?>
-                    </div>
-                    <div>
-                      <a href="delete_post.php?post_id=<?php echo $row['blogid'] ?>"><span style="color:red; font-size:big;font-weight:bold;">X</span></a>
-                    </div>
-                  </div>
+                    ?><h2><?php echo $row['title']; ?></h2>
+                           <small>posted by <a href=""><?php echo $row['author']; ?></a> at <a href=""><?php $row['bdate']; ?></a></small>
+                  <p><?php echo $row['content']; ?></p>
+                      <a href="delete_post.php?post_id=<?php echo $row['blogid'] ?>"><span class="button" >X</span></a>
 
                   <?php
                     }
                 }else{
         ?>
-                    <div style="border:2px solid red;text-align:center;font-size:20px;">You haven't posted anything till now </div>
+                    <div id="block_featured" class="block">
+            <span class="block_inside">
+               <div class="image_block">
+                  
+               </div>
+               <div class="text_block">
+                           <div style="border:2px solid red;text-align:center;font-size:20px;">Empty, Please Come back later</div>
+                           </div>
+            </span>
+         </div>
                     <?php
                 }
-        }
-        echo "</div>";
+        }?>
+        </div>
+            </span>
+         </div>
+        <?php
         }
 catch(Exception $e){
             do_header('Problem');
@@ -379,9 +555,17 @@ function forgot_key_form(){
                           <legend>Forgot Password</legend>
                           <form method="post" action="forgot_key_form_script.php">
                             <table>
+                             <tr>
+                               <td>
+                                 Enter email:
+                               </td>
+                               <td>
+                                 <input type="text" name="email" />
+                               </td>
+                             </tr>
                               <tr>
                                 <td>
-                                  Enter the Key:
+                                  Enter Key:
                                 </td>
 
                                 <td>
@@ -409,34 +593,102 @@ function show_posts_div_world(){
             header('Location:index.php');
         $sql="select * from blogs order by blogid DESC";
             if($result=$db->query($sql)){
-                echo "<div style='border:2px solid black'>";
+               ?><div id="block_featured" class="block">
+            <span class="block_inside">
+               <div class="image_block">
+                  
+               </div>
+               <div class="text_block">
+               <?php
                 if($row=$result->num_rows >0){
                     while($row=$result->fetch_assoc()){
                     ?>
-                          <div class="post-content">
-                            <div>
-                              <?php echo $row['title']; ?>
-                            </div>
-                            <div>
-                              <?php echo $row['content']; ?>
-                            </div>
-                            <div>
-                              <?php echo $row['bdate']; ?>
-                            </div>
-                            <div>
-                              <?php echo $row['author']; ?>
-                            </div>
-                          </div>
+                          <h2><?php echo $row['title']; ?></h2>
+                           <small>posted by <a href=""><?php echo $row['author']; ?></a> at <a href=""><?php $row['bdate']; ?></a></small>
+                            <p><?php echo $row['content']; ?></p>
 
                           <?php
                     }
                 }else{
         ?>
-                            <div style="border:2px solid red;text-align:center;font-size:20px;">Empty, Please Come back later</div>
+                           <div id="block_featured" class="block">
+            <span class="block_inside">
+               <div class="image_block">
+                  
+               </div>
+               <div class="text_block">
+                           <div style="border:2px solid red;text-align:center;font-size:20px;">Empty, Please Come back later</div>
+                           </div>
+            </span>
+         </div>
                             <?php
                 }
         }
-        echo "</div>";
+       ?></div>
+            </span>
+         </div>
+       <?php
+        }
+catch(Exception $e){
+            do_header('Problem');
+            do_content($e->getMessage());
+            do_footer();
+            }
+}
+
+function show_search_posts_div($user){
+    global $db;
+    try{
+        if(!valid_user())
+            header('Location:index.php');
+        $sql="select title,content,bdate,author,blogid from blogs where author='$user' order by blogid desc";
+            if($result=$db->query($sql)){
+                #echo "<div style='border:2px solid black'>";
+               ?><div id="block_featured" class="block">
+            <span class="block_inside">
+               <div class="image_block">
+                  
+               </div>
+               <div class="text_block">
+               <?php
+                if($row=$result->num_rows >0){
+                    while($row=$result->fetch_assoc()){
+                    ?>
+                      <h2><?php echo $row['title']; ?></h2>
+                    <div>
+                      <?php echo $row['content']; ?>
+                    </div>
+                    <div>
+                      <?php echo $row['bdate']; ?>
+                    </div>
+                    <div>
+                      <?php echo $row['author']; ?>
+                    </div>
+                    <div>
+                      <a href="delete_post.php?post_id=<?php echo $row['blogid'] ?>"><span style="color:red; font-size:big;font-weight:bold;">X</span></a>
+                    </div>
+                  </div>
+                  <?php
+                    }
+                }else{
+        ?>
+                    <div id="block_featured" class="block">
+            <span class="block_inside">
+               <div class="image_block">
+                  
+               </div>
+               <div class="text_block">
+                           <div style="border:2px solid red;text-align:center;font-size:20px;">Empty, Please Come back later</div>
+                           </div>
+            </span>
+         </div>
+                    <?php
+                }
+        }
+        ?></div>
+            </span>
+         </div>
+        <?php
         }
 catch(Exception $e){
             do_header('Problem');
