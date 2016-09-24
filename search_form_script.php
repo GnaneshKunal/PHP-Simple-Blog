@@ -14,30 +14,27 @@ if(valid_user()){
                   if($result2=$db->query("select * from blogs where author like '%$search%'")){
                   if($result2->num_rows>0){
                     do_header('Search Results');
-                    echo"<fieldset><legend>Search Results</legend>";
+                    ?><div id="block_featured" class="block">
+            <span class="block_inside">
+               <div class="image_block">
+                  
+               </div>
+               <div class="text_block">
+                    <?php
                     if($hed=$result2->fetch_object()){
                         while($row=$result2->fetch_assoc()){
-                        ?>
-                        <div class="post-content">
-                          <div>
-                            <?php echo $row['title']; ?>
-                          </div>
-                          <div>
-                            <?php echo $row['content']; ?>
-                          </div>
-                          <div>
-                            <?php echo $row['bdate']; ?>
-                          </div>
-                          <div>
-                            <?php echo $row['author']; ?>
-                          </div>
-                        </div>
+                        ?><h2><?php echo $row['title']; ?></h2>
+                           <small>posted by <a href=""><?php echo $row['author']; ?></a> at <a href=""><?php $row['bdate']; ?></a></small>
+                            <p><?php echo $row['content']; ?></p>
                         <?php
                       }
                     }else{
                       throw knownexception("Can't fetch object");
-                    }
-                    echo"</fieldset>";
+                    }?>
+                    </div>
+            </span>
+         </div>
+                    <?php
                     do_footer();
                   }else{
                     throw new knownexception("No Posts to show");
