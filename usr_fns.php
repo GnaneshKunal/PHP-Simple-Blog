@@ -43,7 +43,11 @@ function do_header($title){
         height: 50px;
       }
       
-      #nav-menu-nav {}
+      #nav-menu-nav {
+        position: absolute;
+        right: 30px;
+        
+      }
       
       #nav-menu-ins {
         float: left;
@@ -51,8 +55,7 @@ function do_header($title){
       
       li {
         list-style-type: none;
-        padding-left: 70px;
-        padding-right: 70px;
+        padding-left: 50px;
       }
       
       #nav-menu-logout {
@@ -78,12 +81,13 @@ function do_header($title){
     ?>
       <?php
     echo "<br/ >";
-    do_content($content);
-    echo "<br/ >";
+}
+class knownexception extends Exception{
+  
 }
 function do_content($content){
-    ?>
-        <?php echo $content; ?>
+    ?><div style="border:2px solid red;text-align:center;font-size:20px;"><?php echo $content; ?></div>
+        
         <?php
 }
 function do_footer(){
@@ -277,6 +281,9 @@ function do_menu(){
                   <li id="nav-menu-ins">
                     <a href="world.php">World</a>
                   </li>
+                  <li id="nav-menu-ins">
+                    <a href="search.php">Search</a>
+                  </li>
                   <li id="nav-menu-logout">
                     <a href="insert.php">Add post</a>
                   </li>
@@ -296,6 +303,34 @@ function do_menu(){
 }?>
                 <?php
 echo date('Y-m-j');
+
+function do_search(){
+  if(valid_user()){
+    ?><fieldset>
+      <legend>Search</legend>
+      <form method="post" action="search_form_script.php">
+          <table>
+            <tr>
+              <td>
+                Enter Username:
+              </td>
+              <td>
+                <input type="text" name="search" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input type="submit" name="submit" value='Search' />
+              </td>
+            </tr>
+          </table>
+      </form>
+    </fieldset>
+    <?php
+  }else{
+    header("Location:index.php");
+  }
+}
 
 
 function show_posts_div($user){
@@ -379,9 +414,17 @@ function forgot_key_form(){
                           <legend>Forgot Password</legend>
                           <form method="post" action="forgot_key_form_script.php">
                             <table>
+                             <tr>
+                               <td>
+                                 Enter email:
+                               </td>
+                               <td>
+                                 <input type="text" name="email" />
+                               </td>
+                             </tr>
                               <tr>
                                 <td>
-                                  Enter the Key:
+                                  Enter Key:
                                 </td>
 
                                 <td>
@@ -434,6 +477,51 @@ function show_posts_div_world(){
         ?>
                             <div style="border:2px solid red;text-align:center;font-size:20px;">Empty, Please Come back later</div>
                             <?php
+                }
+        }
+        echo "</div>";
+        }
+catch(Exception $e){
+            do_header('Problem');
+            do_content($e->getMessage());
+            do_footer();
+            }
+}
+
+function show_search_posts_div($user){
+    global $db;
+    try{
+        if(!valid_user())
+            header('Location:index.php');
+        $sql="select title,content,bdate,author,blogid from blogs where author='$user' order by blogid desc";
+            if($result=$db->query($sql)){
+                echo "<div style='border:2px solid black'>";
+                if($row=$result->num_rows >0){
+                    while($row=$result->fetch_assoc()){
+                    ?>
+                  <div class="post-content">
+                    <div>
+                      <?php echo $row['title']; ?>
+                    </div>
+                    <div>
+                      <?php echo $row['content']; ?>
+                    </div>
+                    <div>
+                      <?php echo $row['bdate']; ?>
+                    </div>
+                    <div>
+                      <?php echo $row['author']; ?>
+                    </div>
+                    <div>
+                      <a href="delete_post.php?post_id=<?php echo $row['blogid'] ?>"><span style="color:red; font-size:big;font-weight:bold;">X</span></a>
+                    </div>
+                  </div>
+                  <?php
+                    }
+                }else{
+        ?>
+                    <div style="border:2px solid red;text-align:center;font-size:20px;">You haven't posted anything till now </div>
+                    <?php
                 }
         }
         echo "</div>";
